@@ -29,16 +29,14 @@ def date_of_birth(birth_number):
     year = int(birth_number[0:2])
 
     if month > 12:
-        month = (month - 50)
+        month -= 50
 
     if year < 18:
-        year = "20" + birth_number[0:2]
+        year = "20" + str(year)
     else:
-        year = "19" + birth_number[0:2]
+        year = "19" + str(year)
 
-    birth_date = [day, month, year]
-
-    return birth_date
+    return (day, month, year)
 
 
 if correct_format(current_birth_number):
