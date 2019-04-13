@@ -1,34 +1,50 @@
-birth_number = input('Enter your birth number.' )
+current_birth_number = input('Enter your birth number. ')
 
 
-if len(birth_number) == 11:
-    if '/' in birth_number:
-        pre, after = birth_number.split('/')
-        if (len(pre) == 6 and len(after) == 4 and
-                pre.isnumeric() and after.isnumeric()):
-            correct_format = True
+def correct_format(birth_number):
+    if len(birth_number) == 11:
+        if '/' in birth_number:
+            pre, after = birth_number.split('/')
+            if (len(pre) == 6 and len(after) == 4 and
+                    pre.isnumeric() and after.isnumeric()):
+                return True
+            else:
+                return False
         else:
-            correct_format = False
+            return False
+
+
+def divisibility_by_11(birth_number):
+    return int(birth_number[:6] + birth_number[7:]) % 11 == 0
+
+
+def sex(birth_number):
+    # ternary operator
+    return 'woman' if birth_number[2] in ('5', '6') else 'man'
+
+
+def date_of_birth(birth_number):
+    day = int(birth_number[4:6])
+    month = int(birth_number[2:4])
+    year = int(birth_number[0:2])
+
+    if month > 12:
+        month = (month - 50)
+
+    if year < 18:
+        year = "20" + birth_number[0:2]
     else:
-        correct_format = False
+        year = "19" + birth_number[0:2]
 
-    if correct_format:
-        divisibility_by_11 = int(birth_number[:6] + birth_number[7:]) % 11 == 0
+    birth_date = [day, month, year]
 
-        # ternary operator
-        sex = ('woman' if birth_number[2] in ('5', '6') else 'man')
+    return birth_date
 
-        date_of_birth = [birth_number[:2], birth_number[2:4], birth_number[4:6]]
 
-        if sex == 'woman':
-            date_of_birth[2] = (int(date_of_birth[2]) - 50)
-
-        print(('You entered correct birth number. '
-               'Your date of birth is {}.{}. {} and you sex is {}.').format(
-                birth_number[:2], birth_number[2:4], birth_number[4:6], sex))
-
-    else:
-        print('Birth number in wrong format.')
+if correct_format(current_birth_number):
+    print(('You entered correct birth number. '
+           'Your date of birth is {}.{}. {} and you sex is {}.').format(
+            *date_of_birth(current_birth_number), sex(current_birth_number)))
 
 else:
     print('Birth number in wrong format.')
