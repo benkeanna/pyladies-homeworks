@@ -45,6 +45,7 @@ if correct_format(current_birth_number):
     print(('You entered correct birth number. '
            'Your date of birth is {}.{}. {} and you sex is {}.').format(
             *date_of_birth(current_birth_number), sex(current_birth_number)))
+            # unpacking of args. For more info google: "python * args"
 
 else:
     print('Birth number in wrong format.')
