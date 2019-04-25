@@ -2,6 +2,8 @@ from random import randrange
 
 class Robot():
     max_damage = 5
+
+
     def __init__(self, lifes):
         self.lifes = lifes
 
@@ -11,9 +13,10 @@ class Robot():
         damage = randrange(0, self.max_damage)
         target_robot.defend(damage)
 
+
     def _take_damage(self, damage):
         """Sets new number of lifes when not already 0."""
-        if self.lifes - damage < 0:
+        if self.lifes - damage <0:
             self.lifes = 0
         else:
             self.lifes -= damage
@@ -33,14 +36,13 @@ class Robot():
 class Aggressive(Robot):
     max_damage = 7
     def attack(self, target_robot):
-        """Makes damage to the other robot twice. 
-        Special for aggresive robot."""
+        """Makes damage to the other robot twice. Special for aggresive robot."""
         self._make_damage(target_robot)
         self._make_damage(target_robot)
-    
 class Defensive(Robot):
     max_damage = 3    
     def defend(self, damage):
+
         """Special for deffensive robot, takes only half damage."""
         self._take_damage(damage // 2)
 
@@ -58,4 +60,3 @@ while True:
     if not aggr.is_alive():
         print('Deff won')
         break
-    
