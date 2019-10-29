@@ -1,0 +1,1 @@
+print('lekce 6')
